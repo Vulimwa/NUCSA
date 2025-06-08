@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Contact as ContactIcon, Users, Calendar, Book, MapPin, Mail, Phone, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Contact as ContactIcon, Users, Calendar, Book, MapPin, Mail, Phone, Facebook, Instagram, Linkedin, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 // Use Vite's import.meta.glob to import all jpg images eagerly
@@ -181,8 +181,8 @@ const Contact = () => {
                   <a href="https://facebook.com/NUCSAKenya" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                     <Facebook className="h-8 w-8 text-blue-600 hover:text-blue-800 transition" />
                   </a>
-                  <a href="https://twitter.com/nucsa_kenya" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                    <Twitter className="h-8 w-8 text-blue-400 hover:text-blue-600 transition" />
+                  <a href="https://x.com/nucsa_kenya" target="_blank" rel="noopener noreferrer" aria-label="X">
+                    <X className="h-8 w-8 text-black hover:text-gray-700 transition" />
                   </a>
                   <a href="https://instagram.com/nucsa_official" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                     <Instagram className="h-8 w-8 text-pink-500 hover:text-pink-700 transition" />

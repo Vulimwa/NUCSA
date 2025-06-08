@@ -73,7 +73,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section with Carousel Background */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white py-12 sm:py-16 lg:py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white py-24 sm:py-32 lg:py-40 overflow-hidden">
         {/* Carousel Backgrounds for smooth fade */}
         <div className="absolute inset-0 w-full h-full z-0">
           <img
@@ -105,11 +105,12 @@ const Contact = () => {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-30">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div>
-            <Card className="shadow-xl border-t-4 border-blue-600">
+      {/* Main Contact Content - no overlay, starts below hero */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+          {/* Contact Form + Follow Us */}
+          <div className="flex flex-col gap-8 h-full">
+            <Card className="shadow-xl border-t-4 border-blue-600 h-full flex flex-col justify-center py-8">
               <CardHeader>
                 <CardTitle className="text-2xl">Send us a Message</CardTitle>
                 <CardDescription>
@@ -170,68 +171,7 @@ const Contact = () => {
                 </form>
               </CardContent>
             </Card>
-          </div>
-
-          {/* Contact Information & Map */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {contactInfo.map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <Card key={index} className="border-t-4 border-blue-600">
-                      <CardHeader>
-                        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-2">
-                          <Icon className="h-6 w-6 text-blue-600" />
-                        </div>
-                        <CardTitle className="text-lg">{item.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        {item.details.map((detail, idx) => (
-                          <p key={idx} className="text-gray-600">
-                            {detail}
-                          </p>
-                        ))}
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Office Location with Map */}
-            <Card className="border-t-4 border-blue-600">
-              <CardHeader>
-                <CardTitle className="text-xl">Our Office</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-gray-700">
-                  <p><strong>NUCSA Headquarters</strong></p>
-                  <p>University Way, Nairobi</p>
-                  <p>P.O. Box 12345-00100</p>
-                  <p>Nairobi, Kenya</p>
-                </div>
-                <div className="mt-4">
-                  <iframe
-                    title="NUCSA Office Map"
-                    src="https://www.openstreetmap.org/export/embed.html?bbox=36.8167%2C-1.2833%2C36.8267%2C-1.2733&layer=mapnik"
-                    className="w-full h-48 rounded-lg border mt-2"
-                    loading="lazy"
-                  ></iframe>
-                  <p className="text-xs text-gray-500 mt-1">View on <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer" className="underline text-blue-600">OpenStreetMap</a></p>
-                </div>
-                <div className="mt-4">
-                  <p className="text-sm text-gray-600">
-                    <strong>Office Hours:</strong><br />
-                    Monday - Friday: 9:00 AM - 5:00 PM<br />
-                    Saturday: 10:00 AM - 2:00 PM
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Social Media */}
+            {/* Follow Us Section with modern icons */}
             <Card className="border-t-4 border-blue-600">
               <CardHeader>
                 <CardTitle className="text-xl">Follow Us</CardTitle>
@@ -239,19 +179,63 @@ const Contact = () => {
               <CardContent>
                 <div className="flex gap-4 items-center mb-2">
                   <a href="https://facebook.com/NUCSAKenya" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                    <Facebook className="h-7 w-7 text-blue-600 hover:text-blue-800 transition" />
+                    <Facebook className="h-8 w-8 text-blue-600 hover:text-blue-800 transition" />
                   </a>
                   <a href="https://twitter.com/nucsa_kenya" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                    <Twitter className="h-7 w-7 text-blue-400 hover:text-blue-600 transition" />
+                    <Twitter className="h-8 w-8 text-blue-400 hover:text-blue-600 transition" />
                   </a>
                   <a href="https://instagram.com/nucsa_official" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                    <Instagram className="h-7 w-7 text-pink-500 hover:text-pink-700 transition" />
+                    <Instagram className="h-8 w-8 text-pink-500 hover:text-pink-700 transition" />
                   </a>
                   <a href="https://linkedin.com/company/nucsa-kenya" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                    <Linkedin className="h-7 w-7 text-blue-700 hover:text-blue-900 transition" />
+                    <Linkedin className="h-8 w-8 text-blue-700 hover:text-blue-900 transition" />
                   </a>
                 </div>
                 <p className="text-gray-700">Stay connected with NUCSA for updates and opportunities.</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Get in Touch + Map */}
+          <div className="flex flex-col gap-8 h-full">
+            <Card className="border-t-4 border-blue-600 h-full flex flex-col justify-center py-8">
+              <CardHeader>
+                <CardTitle className="text-2xl">Get in Touch</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  {/* Interactive contact info */}
+                  <div className="flex items-center gap-4">
+                    <Mail className="h-6 w-6 text-blue-600" />
+                    <a href="mailto:info@nucsa.org" className="text-blue-700 hover:underline break-all">info@nucsa.org</a>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <Phone className="h-6 w-6 text-green-600" />
+                    <a href="tel:+254700000000" className="text-green-700 hover:underline">+254 700 000 000</a>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <MapPin className="h-6 w-6 text-purple-600" />
+                    <a href="https://maps.google.com/?q=University+Way,+Nairobi" target="_blank" rel="noopener noreferrer" className="text-purple-700 hover:underline">University Way, Nairobi</a>
+                  </div>
+                </div>
+                {/* Map */}
+                <div className="mt-8">
+                  <iframe
+                    title="NUCSA Office Map"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=36.8167%2C-1.2833%2C36.8267%2C-1.2733&layer=mapnik"
+                    className="w-full h-64 rounded-lg border mt-2"
+                    loading="lazy"
+                  ></iframe>
+                  <p className="text-xs text-gray-500 mt-1">View on <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer" className="underline text-blue-600">OpenStreetMap</a></p>
+                </div>
+                {/* Office Hours */}
+                <div className="mt-4">
+                  <p className="text-sm text-gray-600">
+                    <strong>Office Hours:</strong><br />
+                    Monday - Friday: 9:00 AM - 5:00 PM<br />
+                    Saturday: 10:00 AM - 2:00 PM
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </div>

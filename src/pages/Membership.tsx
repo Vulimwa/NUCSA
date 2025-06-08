@@ -89,7 +89,7 @@ const Membership = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section with Carousel Background */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white py-12 sm:py-16 lg:py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white py-24 sm:py-32 lg:py-40 overflow-hidden">
         {/* Carousel Backgrounds for smooth fade */}
         <div className="absolute inset-0 w-full h-full z-0">
           <img

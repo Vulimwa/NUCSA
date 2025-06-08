@@ -44,8 +44,8 @@ const Index = () => {
       setTimeout(() => {
         setCurrentImage((prev) => (prev + 1) % carouselImages.length);
         setFade(false);
-      }, 600); // fade duration
-    }, 4000);
+      }, 300); // fade duration reduced
+    }, 1800); // carousel interval reduced
     return () => intervalRef.current && clearInterval(intervalRef.current);
   }, [currentImage]);
 
@@ -81,10 +81,10 @@ const Index = () => {
             Uniting students across Nairobi County for excellence and community impact
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gradient-to-r hover:from-blue-600 hover:to-green-600 hover:text-white transition-all duration-300 shadow-lg transform hover:scale-105">
               <Link to="/membership">Join NUCSA Today</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gradient-to-r hover:from-green-600 hover:to-blue-600 hover:text-white transition-all duration-300 shadow-lg transform hover:scale-105">
               <Link to="/about">Learn More</Link>
             </Button>
           </div>
@@ -136,10 +136,10 @@ const Index = () => {
             Join thousands of students across Nairobi County who are part of the NUCSA community
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gradient-to-r hover:from-blue-600 hover:to-green-600 hover:text-white transition-all duration-300 shadow-lg transform hover:scale-105">
               <Link to="/membership">Become a Member</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gradient-to-r hover:from-green-600 hover:to-blue-600 hover:text-white transition-all duration-300 shadow-lg transform hover:scale-105">
               <Link to="/events">View Upcoming Events</Link>
             </Button>
           </div>

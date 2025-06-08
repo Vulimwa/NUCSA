@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+// Use Vite's import.meta.glob to import all jpg images eagerly
+const images = import.meta.glob<string>("@/images/*.jpg", { eager: true, import: 'default' });
+const carouselImages = Object.values(images) as string[];
+
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [currentImage, setCurrentImage] = useState(0);
+  const [prevImage, setPrevImage] = useState(0);
+  const [fade, setFade] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const categories = ["All", "Events", "Leadership", "Community Service", "Academic", "Sports"];
 
@@ -98,16 +106,47 @@ const Gallery = () => {
     ? galleryItems 
     : galleryItems.filter(item => item.category === selectedCategory);
 
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setPrevImage(currentImage);
+      setFade(true);
+      setTimeout(() => {
+        setCurrentImage((prev) => (prev + 1) % carouselImages.length);
+        setFade(false);
+      }, 300); // fade duration reduced
+    }, 1800); // carousel interval reduced
+    return () => intervalRef.current && clearInterval(intervalRef.current);
+  }, [currentImage]);
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white py-12 sm:py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Hero Section with Carousel Background */}
+      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white py-12 sm:py-16 lg:py-20 overflow-hidden">
+        {/* Carousel Backgrounds for smooth fade */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <img
+            src={carouselImages[prevImage]}
+            alt="carousel-prev"
+            className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${fade ? 'opacity-100' : 'opacity-0'}`}
+            style={{zIndex: 1}}
+            draggable={false}
+          />
+          <img
+            src={carouselImages[currentImage]}
+            alt="carousel-current"
+            className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${fade ? 'opacity-0' : 'opacity-100'}`}
+            style={{zIndex: 2}}
+            draggable={false}
+          />
+        </div>
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent z-10" />
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white drop-shadow-lg animate-fade-in">
               NUCSA <span className="text-yellow-300">Gallery</span>
             </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl mb-6 sm:mb-8 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl lg:text-2xl mb-6 sm:mb-8 max-w-3xl mx-auto text-white drop-shadow animate-fade-in">
               Capturing moments of growth, unity, and achievement across Nairobi's student community
             </p>
           </div>

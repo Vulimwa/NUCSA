@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight } from "lucide-react";
@@ -40,7 +39,7 @@ const Blog = () => {
       title: "Academic Excellence Initiative: Supporting Student Success",
       excerpt: "Learn about NUCSA's new academic support programs designed to help students achieve their educational goals.",
       author: "Michael Mwangi",
-      date: "December 28, 2024",
+      date: "December 28, 2025",
       readTime: "3 min read",
       category: "Education",
       image: "/placeholder.svg"
@@ -50,7 +49,7 @@ const Blog = () => {
       title: "Mental Health Matters: Breaking the Stigma on Campus",
       excerpt: "NUCSA's mental health awareness campaign and resources available to support student wellbeing.",
       author: "Esther Akinyi",
-      date: "December 20, 2024",
+      date: "December 20, 2025",
       readTime: "7 min read",
       category: "Wellness",
       image: "/placeholder.svg"
@@ -60,7 +59,7 @@ const Blog = () => {
       title: "Innovation Hub: Student Entrepreneurs Leading Change",
       excerpt: "Meet the student entrepreneurs who are turning their innovative ideas into successful businesses with NUCSA's support.",
       author: "Brian Kiprotich",
-      date: "December 15, 2024",
+      date: "December 15, 2025",
       readTime: "5 min read",
       category: "Innovation",
       image: "/placeholder.svg"

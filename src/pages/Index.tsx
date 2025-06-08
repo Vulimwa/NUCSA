@@ -1,8 +1,12 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Calendar, Book, Contact } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+
+// Use Vite's import.meta.glob to import all jpg images eagerly
+const images = import.meta.glob("@/images/*.jpg", { eager: true, import: 'default' });
+const carouselImages = Object.values(images);
 
 const Index = () => {
   const features = [
@@ -28,27 +32,48 @@ const Index = () => {
     }
   ];
 
+  const [currentImage, setCurrentImage] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % carouselImages.length);
+    }, 4000); // Change image every 4 seconds
+    return () => intervalRef.current && clearInterval(intervalRef.current);
+  }, []);
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-              Welcome to <span className="text-yellow-300">NUCSA</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in">
-              Nairobi Universities Colleges and Students Association - Together We Rise-
-              Uniting students across Nairobi County for excellence and community impact
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-              <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-                <Link to="/membership">Join NUCSA Today</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
-                <Link to="/about">Learn More</Link>
-              </Button>
-            </div>
+      {/* Hero Section with Carousel Background */}
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+        {/* Carousel Background */}
+        <div
+          className="absolute inset-0 w-full h-full z-0 transition-all duration-700"
+          style={{
+            backgroundImage: `url(${carouselImages[currentImage]})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.85,
+            transition: "background-image 0.7s ease-in-out"
+          }}
+        />
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent z-10" />
+        <div className="relative z-20 w-full max-w-2xl mx-auto text-center px-4 py-16">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg animate-fade-in">
+            Welcome to <span className="text-yellow-300">NUCSA</span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white drop-shadow animate-fade-in">
+            Nairobi Universities Colleges and Students Association - Together We Rise-
+            Uniting students across Nairobi County for excellence and community impact
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
+            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+              <Link to="/membership">Join NUCSA Today</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+              <Link to="/about">Learn More</Link>
+            </Button>
           </div>
         </div>
       </section>

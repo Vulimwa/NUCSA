@@ -5,8 +5,8 @@ import { Users, Calendar, Book, Contact } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 // Use Vite's import.meta.glob to import all jpg images eagerly
-const images = import.meta.glob("@/images/*.jpg", { eager: true, import: 'default' });
-const carouselImages = Object.values(images);
+const images = import.meta.glob<string>("@/images/*.jpg", { eager: true, import: 'default' });
+const carouselImages = Object.values(images) as string[];
 
 const Index = () => {
   const features = [
@@ -33,30 +33,43 @@ const Index = () => {
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
+  const [prevImage, setPrevImage] = useState(0);
+  const [fade, setFade] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % carouselImages.length);
-    }, 4000); // Change image every 4 seconds
+      setPrevImage(currentImage);
+      setFade(true);
+      setTimeout(() => {
+        setCurrentImage((prev) => (prev + 1) % carouselImages.length);
+        setFade(false);
+      }, 600); // fade duration
+    }, 4000);
     return () => intervalRef.current && clearInterval(intervalRef.current);
-  }, []);
+  }, [currentImage]);
 
   return (
     <div className="min-h-screen">
       {/* Hero Section with Carousel Background */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-        {/* Carousel Background */}
-        <div
-          className="absolute inset-0 w-full h-full z-0 transition-all duration-700"
-          style={{
-            backgroundImage: `url(${carouselImages[currentImage]})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: 0.85,
-            transition: "background-image 0.7s ease-in-out"
-          }}
-        />
+        {/* Carousel Backgrounds for smooth fade */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <img
+            src={carouselImages[prevImage]}
+            alt="carousel-prev"
+            className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${fade ? 'opacity-100' : 'opacity-0'}`}
+            style={{zIndex: 1}}
+            draggable={false}
+          />
+          <img
+            src={carouselImages[currentImage]}
+            alt="carousel-current"
+            className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${fade ? 'opacity-0' : 'opacity-100'}`}
+            style={{zIndex: 2}}
+            draggable={false}
+          />
+        </div>
         {/* Overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent z-10" />
         <div className="relative z-20 w-full max-w-2xl mx-auto text-center px-4 py-16">

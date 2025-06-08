@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -63,7 +62,7 @@ const Gallery = () => {
       title: "NUCSA Executive Committee",
       category: "Leadership",
       image: "/placeholder.svg",
-      description: "The dedicated leadership team of NUCSA 2024-2025"
+      description: "The dedicated leadership team of NUCSA 2025-2026"
     },
     {
       id: 9,

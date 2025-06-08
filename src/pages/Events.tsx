@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -8,8 +7,8 @@ const Events = () => {
   const upcomingEvents = [
     {
       id: 1,
-      title: "Leadership Summit 2024",
-      date: "2024-07-15",
+      title: "Leadership Summit 2025",
+      date: "2025-07-15",
       time: "9:00 AM - 5:00 PM",
       location: "Kenyatta University",
       description: "A full-day summit focused on developing leadership skills among students",
@@ -19,7 +18,7 @@ const Events = () => {
     {
       id: 2,
       title: "Career Fair",
-      date: "2024-07-22",
+      date: "2025-07-22",
       time: "10:00 AM - 4:00 PM",
       location: "University of Nairobi",
       description: "Connect with top employers and explore career opportunities",
@@ -29,7 +28,7 @@ const Events = () => {
     {
       id: 3,
       title: "Community Clean-Up Drive",
-      date: "2024-07-28",
+      date: "2025-07-28",
       time: "7:00 AM - 12:00 PM",
       location: "Uhuru Park",
       description: "Join us in making Nairobi cleaner and greener",
@@ -42,7 +41,7 @@ const Events = () => {
     {
       id: 4,
       title: "Mental Health Awareness Week",
-      date: "2024-06-10",
+      date: "2025-06-10",
       description: "Week-long campaign promoting mental health awareness among students",
       category: "Health",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
@@ -50,7 +49,7 @@ const Events = () => {
     {
       id: 5,
       title: "Inter-University Sports Festival",
-      date: "2024-05-20",
+      date: "2025-05-20",
       description: "Annual sports competition bringing together students from all universities",
       category: "Sports",
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb"

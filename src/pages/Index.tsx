@@ -38,7 +38,7 @@ const Index = () => {
               Welcome to <span className="text-yellow-300">NUCSA</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in">
-              Nairobi Universities Colleges and Students Association - 
+              Nairobi Universities Colleges and Students Association - Together We Rise-
               Uniting students across Nairobi County for excellence and community impact
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
@@ -61,9 +61,7 @@ const Index = () => {
               Our Mission
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              NUCSA is a legally registered Community-Based Organization (CBO) dedicated to 
-              fostering unity, academic excellence, and community development among students 
-              in Nairobi County.
+              To represent, advocate for and serve the collective interests of Nairobi universities  and colleges students by fostering unity, promoting student welfare, nurturing leadership and facilitating impactful engagement in academic, social, economic and civic spheres.
             </p>
           </div>
 

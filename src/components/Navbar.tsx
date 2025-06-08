@@ -1,8 +1,8 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Users } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import nucsaLogo from "@/images/nucsa-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,8 +27,15 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <Users className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
-              <span className="font-bold text-lg sm:text-xl text-gray-900">NUCSA</span>
+              <img
+                src={nucsaLogo}
+                alt="NUCSA Logo"
+                className="h-6 w-6 sm:h-8 sm:w-8 object-contain"
+                style={{ minWidth: "1.5rem" }}
+              />
+              <span className="font-bold text-lg sm:text-xl text-gray-900">
+                NUCSA
+              </span>
             </Link>
           </div>
 
@@ -47,7 +54,10 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <Button asChild className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-sm px-4 py-2">
+            <Button
+              asChild
+              className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-sm px-4 py-2"
+            >
               <Link to="/membership">Join NUCSA</Link>
             </Button>
           </div>
@@ -83,7 +93,10 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
-              <Button asChild className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 w-full">
+              <Button
+                asChild
+                className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 w-full"
+              >
                 <Link to="/membership" onClick={() => setIsOpen(false)}>
                   Join NUCSA
                 </Link>

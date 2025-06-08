@@ -26,8 +26,8 @@ const About = () => {
             Legally Registered Community-Based Organization
           </h2>
           <p className="text-center text-gray-700 mb-6">
-            NUCSA is officially registered as a Community-Based Organization (CBO) under 
-            Kenyan law, ensuring transparency, accountability, and legitimate representation 
+            NUCSA is officially registered as a Community-Based Organization (CBO) under
+            Kenyan law, ensuring transparency, accountability, and legitimate representation
             of student interests across Nairobi County.
           </p>
           <div className="text-center">
@@ -48,10 +48,7 @@ const About = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-gray-700 text-base">
-                To unite, empower, and advocate for all university and college students 
-                within Nairobi County, fostering academic excellence, personal development, 
-                and positive community impact through collaborative initiatives and 
-                strategic partnerships.
+                To represent, advocate for and serve the collective interests of Nairobi universities  and colleges students by fostering unity, promoting student welfare, nurturing leadership and facilitating impactful engagement in academic, social, economic and civic spheres.
               </CardDescription>
             </CardContent>
           </Card>
@@ -65,9 +62,7 @@ const About = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-gray-700 text-base">
-                To be the premier student organization in Nairobi County, recognized for 
-                our commitment to academic excellence, leadership development, and 
-                sustainable community transformation through student-led initiatives.
+                To be the leading, united and vibrant voice for university and college students in Nairobi, empowering the to achieve academic, personal and societal excellence.
               </CardDescription>
             </CardContent>
           </Card>
@@ -78,20 +73,20 @@ const About = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Our Story</h2>
           <div className="prose prose-lg max-w-none text-gray-700">
             <p className="mb-4">
-              NUCSA was founded with a simple yet powerful vision: to bring together students 
-              from all universities and colleges within Nairobi County under one unified voice. 
-              Recognizing the strength that comes from unity, we established our organization 
+              NUCSA was founded with a simple yet powerful vision: to bring together students
+              from all universities and colleges within Nairobi County under one unified voice.
+              Recognizing the strength that comes from unity, we established our organization
               as a platform for collaboration, advocacy, and positive change.
             </p>
             <p className="mb-4">
-              As a registered Community-Based Organization, we operate with full transparency 
-              and accountability to our members and the broader community. Our governance 
-              structure ensures that every student voice is heard and that our initiatives 
+              As a registered Community-Based Organization, we operate with full transparency
+              and accountability to our members and the broader community. Our governance
+              structure ensures that every student voice is heard and that our initiatives
               align with the needs and aspirations of our diverse membership.
             </p>
             <p>
-              Today, NUCSA continues to grow and evolve, adapting to the changing needs of 
-              students while maintaining our core commitment to excellence, unity, and 
+              Today, NUCSA continues to grow and evolve, adapting to the changing needs of
+              students while maintaining our core commitment to excellence, unity, and
               community service.
             </p>
           </div>

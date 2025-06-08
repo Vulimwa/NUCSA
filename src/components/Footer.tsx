@@ -40,6 +40,16 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/blog" className="text-gray-300 hover:text-white transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link to="/gallery" className="text-gray-300 hover:text-white transition-colors">
+                  Gallery
+                </Link>
+              </li>
+              <li>
                 <Link to="/leadership" className="text-gray-300 hover:text-white transition-colors">
                   Leadership
                 </Link>
@@ -60,7 +70,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 NUCSA - Nairobi Universities Colleges and Students Association. 
+            © 2025 NUCSA - Nairobi Universities Colleges and Students Association. 
             All rights reserved.
           </p>
         </div>

@@ -13,6 +13,8 @@ const Navbar = () => {
     { name: "About", href: "/about" },
     { name: "Membership", href: "/membership" },
     { name: "Events", href: "/events" },
+    { name: "Blog", href: "/blog" },
+    { name: "Gallery", href: "/gallery" },
     { name: "Leadership", href: "/leadership" },
     { name: "Contact", href: "/contact" },
   ];
@@ -22,16 +24,16 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <Users className="h-8 w-8 text-blue-600" />
-              <span className="font-bold text-xl text-gray-900">NUCSA</span>
+              <Users className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+              <span className="font-bold text-lg sm:text-xl text-gray-900">NUCSA</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -45,26 +47,27 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <Button asChild className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700">
+            <Button asChild className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-sm px-4 py-2">
               <Link to="/membership">Join NUCSA</Link>
             </Button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(!isOpen)}
+              className="p-2"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t">
+          <div className="lg:hidden py-4 border-t">
             <div className="flex flex-col space-y-4">
               {navigation.map((item) => (
                 <Link

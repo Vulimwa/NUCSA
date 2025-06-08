@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Membership from "./pages/Membership";
 import Events from "./pages/Events";
+import Blog from "./pages/Blog";
+import Gallery from "./pages/Gallery";
 import Leadership from "./pages/Leadership";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -30,6 +32,8 @@ const App = () => (
               <Route path="/about" element={<About />} />
               <Route path="/membership" element={<Membership />} />
               <Route path="/events" element={<Events />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/gallery" element={<Gallery />} />
               <Route path="/leadership" element={<Leadership />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />

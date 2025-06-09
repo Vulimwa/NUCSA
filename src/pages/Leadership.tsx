@@ -63,33 +63,93 @@ const Leadership = () => {
       email: "organizing@nucsa.org",
       bio: "Committed to effective event planning and student engagement.",
       image: images["/src/images/Member 7.jpg"] || images["/src/images/member 7.jpg"]
+    },
+    {
+      id: 5,
+      name: "Ronnie Ray Moses",
+      position: "Chief of Staff",
+      institution: "",
+      email: "chiefstaff@nucsa.org",
+      bio: "Ensures smooth coordination and support for the executive team.",
+      image: images["/src/images/5.jpg"] || null
+    },
+    {
+      id: 6,
+      name: "Mary Gisare",
+      position: "Treasurer",
+      institution: "",
+      email: "treasurer@nucsa.org",
+      bio: "Oversees financial planning and accountability for NUCSA.",
+      image: null
+    },
+    {
+      id: 7,
+      name: "Amie Awino",
+      position: "Legal Advisor",
+      institution: "",
+      email: "legal@nucsa.org",
+      bio: "Provides legal guidance and ensures compliance with regulations.",
+      image: null
+    },
+    {
+      id: 8,
+      name: "Philip Oketch",
+      position: "Sec. Executive Comm",
+      institution: "",
+      email: "execsec@nucsa.org",
+      bio: "Supports the executive committee in strategic initiatives.",
+      image: null
     }
   ];
 
   const committees = [
     {
       name: "Academic Affairs",
-      head: "Dr. Patricia Njeru",
-      members: 8,
+      head: "Brenda Nyakerario",
+      images: [images["/src/images/com 1 (6).jpg"]],
       focus: "Academic excellence and student support"
     },
     {
-      name: "Community Outreach",
-      head: "Michael Waweru",
-      members: 12,
-      focus: "Community service and social impact"
+      name: "Communications",
+      head: "Faith Gakuo",
+      images: [images["/src/images/com 1 (7).jpg"]],
+      focus: "PR, marketing, and digital presence"
+    },
+    {
+      name: "Climate Action",
+      head: "Caroline Mucomba & Meshack Mutisya",
+      images: [images["/src/images/com 1 (1).jpg"], images["/src/images/com 1 (5).jpg"]],
+      focus: "Environmental sustainability and climate advocacy"
+    },
+    {
+      name: "Youth Leadership",
+      head: "Justice Gift & Agnes Mucemi",
+      images: [images["/src/images/com 1 (2).jpg"], images["/src/images/com 1 (3).jpg"]],
+      focus: "Empowering youth leaders and leadership development"
     },
     {
       name: "Events & Programs",
-      head: "Linda Akinyi",
-      members: 10,
+      head: "John Nyongesa",
+      images: [images["/src/images/Member 7.jpg"]],
       focus: "Event planning and student activities"
     },
     {
-      name: "Communications",
-      head: "Peter Mutua",
-      members: 6,
-      focus: "PR, marketing, and digital presence"
+      name: "Mental Health",
+      head: "Rowzil Paultine",
+      images: [images["/src/images/com 1 (9).jpg"]],
+      focus: "Mental health awareness and support"
+    },
+    {
+      name: "Sports, Arts & Culture",
+      head: "Judy Chepkoech Too & Clinton",
+      images: [images["/src/images/com 1 (4).jpg"], images["/src/images/12.jpg"]],
+      focus: "Sports, arts, and cultural engagement"
+    },
+    {
+      name: "Economic Empowerment",
+      head: "Mutai Valarie",
+      images: [],
+      focus: "Economic empowerment and entrepreneurship"
     }
   ];
 
@@ -131,12 +191,16 @@ const Leadership = () => {
           {executiveTeam.map((leader) => (
             <Card key={leader.id} className="text-center hover:shadow-2xl transition-transform duration-300 hover:scale-105 border-t-4 border-blue-500 bg-white/90">
               <CardHeader>
-                <div className="mx-auto w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-blue-200 shadow-lg">
-                  <img 
-                    src={leader.image} 
-                    alt={leader.name}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="mx-auto w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-blue-200 shadow-lg flex items-center justify-center bg-gray-100">
+                  {leader.image ? (
+                    <img 
+                      src={leader.image} 
+                      alt={leader.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-gray-400 text-lg">N/A</span>
+                  )}
                 </div>
                 <CardTitle className="text-xl flex flex-col items-center gap-2">
                   <span>{leader.name}</span>
@@ -150,7 +214,9 @@ const Leadership = () => {
                 <p className="text-gray-700 mb-4">{leader.bio}</p>
                 <div className="flex items-center justify-center gap-2 text-blue-600">
                   <Contact className="h-5 w-5" />
-                  <a href={`mailto:${leader.email}`} className="hover:underline">{leader.email}</a>
+                  {leader.email ? (
+                    <a href={`mailto:${leader.email}`} className="hover:underline">{leader.email}</a>
+                  ) : null}
                 </div>
               </CardContent>
             </Card>
@@ -163,19 +229,34 @@ const Leadership = () => {
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Committee Structure</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {committees.map((committee, index) => (
-            <Card key={index} className="hover:shadow-xl transition-transform duration-300 hover:scale-105 border-t-4 border-green-400 bg-white/90">
+            <Card
+              key={index}
+              className="hover:shadow-2xl transition-transform duration-300 hover:scale-105 border-t-4 border-green-400 bg-white/90 cursor-pointer group"
+              tabIndex={0}
+              aria-label={`Committee: ${committee.name}`}
+            >
               <CardHeader>
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow">
-                  <Users className="h-8 w-8 text-green-600" />
+                <div className="flex justify-center gap-2 mb-4">
+                  {committee.images && committee.images.length > 0 ? (
+                    committee.images.map((img, i) => (
+                      <img
+                        key={i}
+                        src={img}
+                        alt={committee.head.split('&')[i]?.trim() || committee.head}
+                        className="w-16 h-16 rounded-full border-4 border-green-200 shadow object-cover group-hover:ring-4 group-hover:ring-green-400 transition-all"
+                      />
+                    ))
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400">N/A</div>
+                  )}
                 </div>
-                <CardTitle className="text-xl text-center">{committee.name}</CardTitle>
+                <CardTitle className="text-lg text-center">
+                  {committee.name}
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 mb-2">
-                  <strong>Committee Head:</strong> {committee.head}
-                </p>
-                <p className="text-gray-600 mb-2">{committee.focus}</p>
-                {/* Removed email/contact for committee since property does not exist */}
+                <p className="text-blue-700 font-semibold mb-1 text-center">{committee.head}</p>
+                <p className="text-gray-600 mb-2 text-center">{committee.focus}</p>
               </CardContent>
             </Card>
           ))}

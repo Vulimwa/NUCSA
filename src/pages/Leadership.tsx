@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Users, Contact, Heart, Book, Calendar, Star, UserPlus } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 // Use Vite's import.meta.glob to import all jpg images eagerly
 const images = import.meta.glob<string>("@/images/*.jpg", { eager: true, import: 'default' });
@@ -35,7 +36,9 @@ const Leadership = () => {
       institution: "Kenyatta University",
       email: "chair@nucsa.org",
       bio: "Dedicated to student leadership and unity across Nairobi County.",
-      image: images["/src/images/Member 6.jpg"] || images["/src/images/member 6.jpg"]
+      image: images["/src/images/Member 6.jpg"] || images["/src/images/member 6.jpg"],
+      promise: "To uphold the values of NUCSA and ensure every student's voice is heard.",
+      message: "Together, we will achieve greatness and foster a united student community."
     },
     {
       id: 2,
@@ -44,7 +47,9 @@ const Leadership = () => {
       institution: "Strathmore University",
       email: "vice@nucsa.org",
       bio: "Passionate about empowering students and fostering growth.",
-      image: images["/src/images/Member 5.jpg"] || images["/src/images/member 5.jpg"]
+      image: images["/src/images/Member 5.jpg"] || images["/src/images/member 5.jpg"],
+      promise: "To empower every student and ensure their ideas and concerns are addressed.",
+      message: "I believe in a proactive approach to student leadership, where every voice matters."
     },
     {
       id: 3,
@@ -53,7 +58,9 @@ const Leadership = () => {
       institution: "JKUAT",
       email: "secretary@nucsa.org",
       bio: "Focused on organizational excellence and transparency.",
-      image: images["/src/images/12.jpg"] || images["/src/images/12.jpg"]
+      image: images["/src/images/12.jpg"] || images["/src/images/12.jpg"],
+      promise: "To maintain transparency and uphold the highest standards of integrity.",
+      message: "Organizational excellence is key to our success; together, we will achieve it."
     },
     {
       id: 4,
@@ -62,7 +69,9 @@ const Leadership = () => {
       institution: "Daystar University",
       email: "organizing@nucsa.org",
       bio: "Committed to effective event planning and student engagement.",
-      image: images["/src/images/Member 7.jpg"] || images["/src/images/member 7.jpg"]
+      image: images["/src/images/Member 7.jpg"] || images["/src/images/member 7.jpg"],
+      promise: "To organize impactful events that resonate with the student community.",
+      message: "Every event is an opportunity to engage and empower students; let's make them count."
     },
     {
       id: 5,
@@ -71,7 +80,9 @@ const Leadership = () => {
       institution: "",
       email: "chiefstaff@nucsa.org",
       bio: "Ensures smooth coordination and support for the executive team.",
-      image: images["/src/images/5.jpg"] || null
+      image: images["/src/images/5.jpg"] || null,
+      promise: "To ensure seamless coordination within the executive team and with the student body.",
+      message: "A united team is a successful team; let's work together to achieve our goals."
     },
     {
       id: 6,
@@ -80,7 +91,9 @@ const Leadership = () => {
       institution: "",
       email: "treasurer@nucsa.org",
       bio: "Oversees financial planning and accountability for NUCSA.",
-      image: null
+      image: null,
+      promise: "To manage NUCSA's finances with utmost integrity and transparency.",
+      message: "Financial responsibility is key to our sustainability; I am committed to upholding it."
     },
     {
       id: 7,
@@ -89,7 +102,9 @@ const Leadership = () => {
       institution: "",
       email: "legal@nucsa.org",
       bio: "Provides legal guidance and ensures compliance with regulations.",
-      image: null
+      image: null,
+      promise: "To provide sound legal advice and ensure NUCSA's compliance with all regulations.",
+      message: "Legal integrity is the foundation of our operations; I am here to uphold it."
     },
     {
       id: 8,
@@ -98,7 +113,9 @@ const Leadership = () => {
       institution: "",
       email: "execsec@nucsa.org",
       bio: "Supports the executive committee in strategic initiatives.",
-      image: null
+      image: null,
+      promise: "To support the executive committee in executing strategic initiatives effectively.",
+      message: "Strategic execution is key to our success; let's achieve it together."
     }
   ];
 
@@ -152,6 +169,20 @@ const Leadership = () => {
       focus: "Economic empowerment and entrepreneurship"
     }
   ];
+
+  // Modal state
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedLeader, setSelectedLeader] = useState<typeof executiveTeam[number] | null>(null);
+
+  const handleOpenModal = (leader: typeof executiveTeam[number]) => {
+    setSelectedLeader(leader);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setSelectedLeader(null);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -218,6 +249,13 @@ const Leadership = () => {
                     <a href={`mailto:${leader.email}`} className="hover:underline">{leader.email}</a>
                   ) : null}
                 </div>
+                <Button 
+                  variant="outline" 
+                  className="mt-4 w-full"
+                  onClick={() => handleOpenModal(leader)}
+                >
+                  Read Message
+                </Button>
               </CardContent>
             </Card>
           ))}
@@ -262,6 +300,37 @@ const Leadership = () => {
           ))}
         </div>
       </section>
+
+      {/* Modal for Leader's Message */}
+      <Dialog open={openModal} onOpenChange={setOpenModal}>
+        <DialogContent className="max-w-lg">
+          <div className="flex flex-col sm:flex-row">
+            <div className="sm:w-1/3 p-4 bg-gray-100 flex items-center justify-center rounded-lg">
+              {selectedLeader?.image ? (
+                <img 
+                  src={selectedLeader.image} 
+                  alt={selectedLeader?.name}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              ) : (
+                <span className="text-gray-400 text-lg">No Image Available</span>
+              )}
+            </div>
+            <div className="sm:w-2/3 p-6">
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold mb-2">
+                  Message from {selectedLeader?.name}
+                </DialogTitle>
+                <DialogDescription className="text-gray-700 mb-4">
+                  {selectedLeader?.message}
+                </DialogDescription>
+              </DialogHeader>
+              <p className="text-gray-900 font-semibold mb-2">My Promise:</p>
+              <p className="text-gray-700 mb-4">{selectedLeader?.promise}</p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

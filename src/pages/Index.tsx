@@ -61,6 +61,8 @@ const Index = () => {
             className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${fade ? 'opacity-100' : 'opacity-0'}`}
             style={{zIndex: 1}}
             draggable={false}
+            loading="lazy"
+            fetchPriority="low"
           />
           <img
             src={carouselImages[currentImage]}
@@ -68,6 +70,8 @@ const Index = () => {
             className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${fade ? 'opacity-0' : 'opacity-100'}`}
             style={{zIndex: 2}}
             draggable={false}
+            loading="lazy"
+            fetchPriority="low"
           />
         </div>
         {/* Overlay for text readability */}
@@ -104,7 +108,7 @@ const Index = () => {
           </div>
 
           <div className="flex justify-center items-center w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto w-full max-w-5xl" role="list" aria-label="NUCSA Home Features">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mx-auto w-full max-w-5xl" role="list" aria-label="NUCSA Home Features">
               {features.map((feature, index) => {
                 const Icon = feature.icon;
                 // Assign unique color for each card

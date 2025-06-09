@@ -14,63 +14,63 @@ Object.entries(memberImages).forEach(([path, url]) => {
 const testimonials = [
   {
     image: imageMap["Member 1.jpg"],
-    name: "Sarah",
+    name: "Hannan Kassim",
     university: "UoN",
     rating: 5,
     text: "NUCSA gave me the platform to grow as a leader and make lifelong friends. The events and mentorship are top-notch!"
   },
   {
     image: imageMap["Member 2.jpg"],
-    name: "Brian",
+    name: "Caroline Mucomba",
     university: "KU",
     rating: 5,
     text: "The community projects and support from NUCSA have made a real difference in my academic and personal life."
   },
   {
     image: imageMap["Member 3.jpg"],
-    name: "Grace",
+    name: "Kyalo",
     university: "JKUAT",
     rating: 5,
     text: "I love the diversity and opportunities for growth. NUCSA is truly a family!"
   },
   {
     image: imageMap["Member 4.jpg"],
-    name: "Kevin",
+    name: "Dishon",
     university: "USIU",
     rating: 4,
     text: "NUCSA's leadership programs helped me build confidence and skills for my future."
   },
   {
     image: imageMap["Member 5.jpg"],
-    name: "Esther",
+    name: "Gathoni Kaara",
     university: "Strathmore",
     rating: 5,
     text: "The events are always fun and impactful. I’ve made so many connections!"
   },
   {
     image: imageMap["Member 6.jpg"],
-    name: "James",
+    name: "Kelvin Ndara",
     university: "Kenyatta",
     rating: 4,
     text: "NUCSA is a great place to meet new people and give back to the community."
   },
   {
     image: imageMap["Member 7.jpg"],
-    name: "Linda",
+    name: "John Nyongesa",
     university: "Daystar",
     rating: 5,
     text: "I appreciate the mentorship and support from the NUCSA team."
   },
   {
     image: imageMap["Member 8.jpg"],
-    name: "Peter",
+    name: "Nicole",
     university: "CUEA",
     rating: 5,
     text: "The impact NUCSA has on students is amazing. Proud to be a member!"
   },
   {
     image: imageMap["Member 9.jpg"],
-    name: "Janet",
+    name: "Rowzil",
     university: "TUK",
     rating: 5,
     text: "NUCSA’s events and projects have inspired me to do more for others."
@@ -81,6 +81,7 @@ const TestimonialsCarousel: React.FC = () => {
   const [offset, setOffset] = useState(0);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
 
+  // Always show 4 cards on desktop (>=1024px)
   let cardsToShow = 1;
   if (windowWidth >= 1024) cardsToShow = 4;
   else if (windowWidth >= 768) cardsToShow = 3;
@@ -88,12 +89,13 @@ const TestimonialsCarousel: React.FC = () => {
   else cardsToShow = 1;
 
   // Card width in px (should match min-w in className)
-  const CARD_WIDTH = 270; // min-w-[250px] + gap
+  const CARD_WIDTH = 250; // min-w-[250px]
   const GAP = 24; // gap-6 = 1.5rem = 24px
   const totalCardWidth = CARD_WIDTH + GAP;
 
   // Duplicate testimonials for seamless loop
   const looped = [...testimonials, ...testimonials];
+  const visibleWidth = cardsToShow * totalCardWidth;
 
   useEffect(() => {
     let animationFrame: number;
@@ -125,9 +127,9 @@ const TestimonialsCarousel: React.FC = () => {
         className="flex gap-6"
         style={{
           minHeight: 320,
+          width: looped.length * totalCardWidth,
           transform: `translateX(-${offset}px)`,
           transition: 'none',
-          width: totalCardWidth * looped.length,
         }}
       >
         {looped.map((t, idx) => (
@@ -146,6 +148,14 @@ const TestimonialsCarousel: React.FC = () => {
           </Card>
         ))}
       </div>
+      <style>{`
+        @media (min-width: 1024px) {
+          .testimonials-carousel-viewport {
+            width: ${visibleWidth}px !important;
+            max-width: 100%;
+          }
+        }
+      `}</style>
     </div>
   );
 };

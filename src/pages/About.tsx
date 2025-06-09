@@ -35,7 +35,7 @@ const About = () => {
   useEffect(() => {
     let frame: number;
     let start = {members: 0, events: 0, universities: 0, projects: 0};
-    const end = {members: 5000, events: 150, universities: 25, projects: 100};
+    const end = {members: 1000, events: 10, universities: 25, projects: 10};
     const duration = 1200;
     const startTime = performance.now();
     function animate(now: number) {
@@ -130,28 +130,43 @@ const About = () => {
       </section>
 
       {/* Our Impact - Animated Counters */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Impact</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div className="flex justify-center mb-2"><Users className="h-8 w-8 text-blue-600" /></div>
-            <div className="text-4xl font-bold text-blue-700 mb-1">{impact.members}+</div>
-            <div className="text-gray-600">Active Members</div>
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="absolute inset-0 w-full h-full bg-gray-100 opacity-80 rounded-3xl pointer-events-none" aria-hidden="true" />
+        <div className="relative z-10">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">Our Impact</h2>
+          <p className="text-lg text-gray-700 font-semibold mb-8 text-center max-w-2xl mx-auto">Together, we are shaping the future of Nairobi's student community one leader, one event, one project at a time.</p>
+          <div className="flex justify-center mb-8">
+            <div className="w-24 h-1 bg-gray-300 rounded-full" />
           </div>
-          <div>
-            <div className="flex justify-center mb-2"><Calendar className="h-8 w-8 text-green-600" /></div>
-            <div className="text-4xl font-bold text-green-700 mb-1">{impact.events}+</div>
-            <div className="text-gray-600">Events Organized</div>
-          </div>
-          <div>
-            <div className="flex justify-center mb-2"><Book className="h-8 w-8 text-yellow-500" /></div>
-            <div className="text-4xl font-bold text-yellow-600 mb-1">{impact.universities}+</div>
-            <div className="text-gray-600">Universities Reached</div>
-          </div>
-          <div>
-            <div className="flex justify-center mb-2"><HeartHandshake className="h-8 w-8 text-purple-600" /></div>
-            <div className="text-4xl font-bold text-purple-700 mb-1">{impact.projects}+</div>
-            <div className="text-gray-600">Community Projects</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95">
+              <div className="flex flex-col items-center py-8">
+                <div className="flex justify-center mb-2"><Users className="h-8 w-8 text-blue-400" /></div>
+                <div className="text-4xl font-bold text-gray-800 mb-1">{impact.members}+</div>
+                <div className="text-gray-600">Active Members</div>
+              </div>
+            </Card>
+            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95">
+              <div className="flex flex-col items-center py-8">
+                <div className="flex justify-center mb-2"><Calendar className="h-8 w-8 text-green-400" /></div>
+                <div className="text-4xl font-bold text-gray-800 mb-1">{impact.events}+</div>
+                <div className="text-gray-600">Events Organized</div>
+              </div>
+            </Card>
+            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95">
+              <div className="flex flex-col items-center py-8">
+                <div className="flex justify-center mb-2"><Book className="h-8 w-8 text-yellow-400" /></div>
+                <div className="text-4xl font-bold text-gray-800 mb-1">{impact.universities}</div>
+                <div className="text-gray-600">Universities/Colleges</div>
+              </div>
+            </Card>
+            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95">
+              <div className="flex flex-col items-center py-8">
+                <div className="flex justify-center mb-2"><HeartHandshake className="h-8 w-8 text-purple-400" /></div>
+                <div className="text-4xl font-bold text-gray-800 mb-1">{impact.projects}+</div>
+                <div className="text-gray-600">Community Projects</div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>

@@ -30,39 +30,39 @@ const Leadership = () => {
   const executiveTeam = [
     {
       id: 1,
-      name: "Sarah Wanjiku",
+      name: "Kelvin Ndara",
       position: "Chairperson",
-      institution: "University of Nairobi",
+      institution: "Kenyatta University",
       email: "chair@nucsa.org",
-      bio: "Fourth-year Law student passionate about student rights and advocacy",
-      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7"
+      bio: "Dedicated to student leadership and unity across Nairobi County.",
+      image: images["/src/images/Member 6.jpg"] || images["/src/images/member 6.jpg"]
     },
     {
       id: 2,
-      name: "David Kiprotich",
+      name: "Gathoni Kaara",
       position: "Vice Chairperson",
-      institution: "Kenyatta University",
+      institution: "Strathmore University",
       email: "vice@nucsa.org",
-      bio: "Engineering student with a focus on innovation and technology in education",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+      bio: "Passionate about empowering students and fostering growth.",
+      image: images["/src/images/Member 5.jpg"] || images["/src/images/member 5.jpg"]
     },
     {
       id: 3,
-      name: "Grace Muthoni",
+      name: "Clinton",
       position: "Secretary General",
-      institution: "USIU Africa",
+      institution: "JKUAT",
       email: "secretary@nucsa.org",
-      bio: "Business student dedicated to organizational excellence and transparency",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+      bio: "Focused on organizational excellence and transparency.",
+      image: images["/src/images/12.jpg"] || images["/src/images/12.jpg"]
     },
     {
       id: 4,
-      name: "James Ochieng",
-      position: "Treasurer",
-      institution: "Strathmore University",
-      email: "treasurer@nucsa.org",
-      bio: "Finance student ensuring responsible financial management",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+      name: "John Nyongesa",
+      position: "Organizing Secretary",
+      institution: "Daystar University",
+      email: "organizing@nucsa.org",
+      bio: "Committed to effective event planning and student engagement.",
+      image: images["/src/images/Member 7.jpg"] || images["/src/images/member 7.jpg"]
     }
   ];
 

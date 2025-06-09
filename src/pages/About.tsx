@@ -161,25 +161,23 @@ const About = () => {
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Story</h2>
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
-            <AccordionTrigger>NUCSA is Founded (2015)</AccordionTrigger>
+            <AccordionTrigger>NUCSA is Founded (2025)</AccordionTrigger>
             <AccordionContent>
-              <p className="mb-2">A group of passionate students from Nairobi universities came together to form NUCSA, aiming to unite and empower students across the county.</p>
+              <p className="mb-2">A group of passionate students from Nairobi universities came together in 2025 to form NUCSA, aiming to unite and empower students across the county.</p>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger>Official CBO Registration (2017)</AccordionTrigger>
+            <AccordionTrigger>Official CBO Registration (2025)</AccordionTrigger>
             <AccordionContent>
-              <p className="mb-2">NUCSA became a legally registered Community-Based Organization, ensuring transparency, accountability, and legitimate representation of student interests.</p>
+              <p className="mb-2">NUCSA became a legally registered Community-Based Organization in 2025, ensuring transparency, accountability, and legitimate representation of student interests.</p>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
-            <AccordionTrigger>Major Milestones (2018-2025)</AccordionTrigger>
+            <AccordionTrigger>Major Milestones</AccordionTrigger>
             <AccordionContent>
               <ul className="list-disc list-inside space-y-1">
-                <li>Launched annual Leadership Summit and Career Fair</li>
-                <li>Expanded to 25+ universities and colleges</li>
-                <li>Initiated 100+ community projects</li>
-                <li>Recognized for advocacy and student welfare programs</li>
+                <li>Leadership Transformational Training</li>
+                <li>Registering Members on Board</li>
               </ul>
             </AccordionContent>
           </AccordionItem>

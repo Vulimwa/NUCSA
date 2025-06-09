@@ -1,6 +1,6 @@
-
 import { Link } from "react-router-dom";
-import { Users, Calendar, Book, Contact } from "lucide-react";
+import { Calendar, Book, Contact } from "lucide-react";
+import nucsaLogo from "@/images/nucsa-logo.png";
 
 const Footer = () => {
   return (
@@ -10,12 +10,12 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <Users className="h-8 w-8 text-blue-400" />
+              <img src={nucsaLogo} alt="NUCSA Logo" className="h-8 w-8" />
               <span className="font-bold text-xl">NUCSA</span>
             </div>
             <p className="text-gray-300 max-w-md">
-              Nairobi Universities Colleges and Students Association - A registered 
-              Community-Based Organization uniting all college and university students 
+              Nairobi Universities Colleges and Students Association - A registered
+              Community-Based Organization uniting all college and university students
               within Nairobi County.
             </p>
           </div>
@@ -70,7 +70,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2025 NUCSA - Nairobi Universities Colleges and Students Association. 
+            © 2025 NUCSA - Nairobi Universities Colleges and Students Association.
             All rights reserved.
           </p>
         </div>

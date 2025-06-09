@@ -103,25 +103,55 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="mx-auto w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                      <Icon className="h-6 w-6 text-blue-600" />
-                    </div>
-                    <CardTitle className="text-xl">{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-gray-600">
-                      {feature.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              );
-            })}
+          <div className="flex justify-center items-center w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto w-full max-w-5xl" role="list" aria-label="NUCSA Home Features">
+              {features.map((feature, index) => {
+                const Icon = feature.icon;
+                // Assign unique color for each card
+                const iconColors = [
+                  "text-blue-600 group-hover:text-blue-800 bg-blue-100",
+                  "text-green-600 group-hover:text-green-800 bg-green-100",
+                  "text-yellow-500 group-hover:text-yellow-700 bg-yellow-100",
+                  "text-purple-600 group-hover:text-purple-800 bg-purple-100"
+                ];
+                const colorClass = iconColors[index % iconColors.length];
+                // Concise, action-oriented text
+                const actionLabels = [
+                  "Unite Students",
+                  "Join Events",
+                  "Get Academic Support",
+                  "Impact Community"
+                ];
+                return (
+                  <>
+                    <Card
+                      key={index}
+                      className="text-center hover:shadow-2xl transition-transform duration-300 hover:scale-105 group focus-within:shadow-2xl focus-within:scale-105 border-t-4 border-blue-200 bg-white/95 outline-none"
+                      tabIndex={0}
+                      role="listitem"
+                      aria-label={feature.title}
+                    >
+                      <CardHeader>
+                        <div className={`mx-auto w-14 h-14 rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 ${colorClass} group-hover:scale-110 group-focus:scale-110`}>
+                          <Icon className={`h-8 w-8 transition-colors duration-300 ${colorClass.split(' ')[0]} group-hover:${colorClass.split(' ')[1]}`} aria-hidden="true" />
+                        </div>
+                        <CardTitle className="text-xl font-semibold mb-1">{feature.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <CardDescription className="text-gray-600 mb-2">{feature.description}</CardDescription>
+                        <span className="inline-block text-sm font-medium text-blue-600 group-hover:underline group-focus:underline">{actionLabels[index]}</span>
+                      </CardContent>
+                    </Card>
+                    {/* Decorative divider for desktop, except after last card */}
+                    {index < features.length - 1 && (
+                      <div className="hidden lg:flex items-center justify-center" aria-hidden="true">
+                        <div className="w-1 h-16 bg-gradient-to-b from-blue-200 via-gray-200 to-green-200 rounded-full mx-auto" />
+                      </div>
+                    )}
+                  </>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

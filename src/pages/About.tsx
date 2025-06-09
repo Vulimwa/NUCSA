@@ -138,31 +138,49 @@ const About = () => {
           <div className="flex justify-center mb-8">
             <div className="w-24 h-1 bg-gray-300 rounded-full" />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center" role="list" aria-label="NUCSA Impact Statistics">
+            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95 group" role="listitem" aria-label="Active Members">
               <div className="flex flex-col items-center py-8">
-                <div className="flex justify-center mb-2"><Users className="h-8 w-8 text-blue-400" /></div>
+                <div className="flex justify-center mb-2">
+                  <Users className="h-8 w-8 text-blue-400 transition-transform duration-300 group-hover:scale-125 group-hover:text-blue-600" aria-hidden="true" />
+                </div>
                 <div className="text-4xl font-bold text-gray-800 mb-1">{impact.members}+</div>
                 <div className="text-gray-600">Active Members</div>
               </div>
             </Card>
-            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95">
+            {/* Decorative divider for desktop */}
+            <div className="hidden md:flex items-center justify-center" aria-hidden="true">
+              <div className="w-1 h-16 bg-gradient-to-b from-blue-200 via-gray-200 to-green-200 rounded-full mx-auto" />
+            </div>
+            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95 group" role="listitem" aria-label="Events Organized">
               <div className="flex flex-col items-center py-8">
-                <div className="flex justify-center mb-2"><Calendar className="h-8 w-8 text-green-400" /></div>
+                <div className="flex justify-center mb-2">
+                  <Calendar className="h-8 w-8 text-green-400 transition-transform duration-300 group-hover:scale-125 group-hover:text-green-600" aria-hidden="true" />
+                </div>
                 <div className="text-4xl font-bold text-gray-800 mb-1">{impact.events}+</div>
                 <div className="text-gray-600">Events Organized</div>
               </div>
             </Card>
-            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95">
+            <div className="hidden md:flex items-center justify-center" aria-hidden="true">
+              <div className="w-1 h-16 bg-gradient-to-b from-green-200 via-gray-200 to-yellow-200 rounded-full mx-auto" />
+            </div>
+            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95 group" role="listitem" aria-label="Universities and Colleges">
               <div className="flex flex-col items-center py-8">
-                <div className="flex justify-center mb-2"><Book className="h-8 w-8 text-yellow-400" /></div>
+                <div className="flex justify-center mb-2">
+                  <Book className="h-8 w-8 text-yellow-400 transition-transform duration-300 group-hover:scale-125 group-hover:text-yellow-600" aria-hidden="true" />
+                </div>
                 <div className="text-4xl font-bold text-gray-800 mb-1">{impact.universities}</div>
                 <div className="text-gray-600">Universities/Colleges</div>
               </div>
             </Card>
-            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95">
+            <div className="hidden md:flex items-center justify-center" aria-hidden="true">
+              <div className="w-1 h-16 bg-gradient-to-b from-yellow-200 via-gray-200 to-purple-200 rounded-full mx-auto" />
+            </div>
+            <Card className="hover:shadow-lg transition-transform duration-300 hover:scale-105 border-t-2 border-gray-200 bg-white/95 group" role="listitem" aria-label="Community Projects">
               <div className="flex flex-col items-center py-8">
-                <div className="flex justify-center mb-2"><HeartHandshake className="h-8 w-8 text-purple-400" /></div>
+                <div className="flex justify-center mb-2">
+                  <HeartHandshake className="h-8 w-8 text-purple-400 transition-transform duration-300 group-hover:scale-125 group-hover:text-purple-600" aria-hidden="true" />
+                </div>
                 <div className="text-4xl font-bold text-gray-800 mb-1">{impact.projects}+</div>
                 <div className="text-gray-600">Community Projects</div>
               </div>

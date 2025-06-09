@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Users, FileText, Target, Heart, Star, Calendar, Book, HeartHandshake, Quote } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Star as StarIcon } from "lucide-react";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 
 // Use Vite's import.meta.glob to import all jpg images eagerly
 const images = import.meta.glob<string>("@/images/*.jpg", { eager: true, import: 'default' });
@@ -183,24 +186,18 @@ const About = () => {
         </Accordion>
       </section>
 
-      {/* Testimonials/Quotes */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      {/* Testimonials/Quotes - Carousel */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">What Our Members Say</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card className="bg-blue-50 border-l-4 border-blue-400 p-6 flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <Quote className="h-6 w-6 text-blue-400" />
-              <span className="font-semibold text-blue-700">Sarah K., UoN</span>
-            </div>
-            <p className="text-gray-700">“NUCSA gave me the platform to grow as a leader and make lifelong friends. The events and mentorship are top-notch!”</p>
-          </Card>
-          <Card className="bg-green-50 border-l-4 border-green-400 p-6 flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <Quote className="h-6 w-6 text-green-400" />
-              <span className="font-semibold text-green-700">Brian M., KU</span>
-            </div>
-            <p className="text-gray-700">“The community projects and support from NUCSA have made a real difference in my academic and personal life.”</p>
-          </Card>
+        <div className="flex justify-center">
+          <div className="w-full max-w-3xl">
+            <Carousel>
+              <CarouselContent>
+                {/* Use shared TestimonialsCarousel component here */}
+                <TestimonialsCarousel />
+              </CarouselContent>
+            </Carousel>
+          </div>
         </div>
       </section>
 

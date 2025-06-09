@@ -125,7 +125,8 @@ const Events = () => {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-30">
+      {/* Upcoming Events - starts below hero, no overlay */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         {/* Upcoming Events */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Upcoming Events</h2>

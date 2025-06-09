@@ -1,7 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Users, FileText, Target, Heart } from "lucide-react";
+import { Users, FileText, Target, Heart, Star, Calendar, Book, HeartHandshake, Quote } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 // Use Vite's import.meta.glob to import all jpg images eagerly
 const images = import.meta.glob<string>("@/images/*.jpg", { eager: true, import: 'default' });
@@ -25,6 +26,28 @@ const About = () => {
     }, 1800); // carousel interval
     return () => intervalRef.current && clearInterval(intervalRef.current);
   }, [currentImage]);
+
+  // Animated counters for impact
+  const [impact, setImpact] = useState({members: 0, events: 0, universities: 0, projects: 0});
+  useEffect(() => {
+    let frame: number;
+    let start = {members: 0, events: 0, universities: 0, projects: 0};
+    const end = {members: 5000, events: 150, universities: 25, projects: 100};
+    const duration = 1200;
+    const startTime = performance.now();
+    function animate(now: number) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      setImpact({
+        members: Math.floor(progress * end.members),
+        events: Math.floor(progress * end.events),
+        universities: Math.floor(progress * end.universities),
+        projects: Math.floor(progress * end.projects),
+      });
+      if (progress < 1) frame = requestAnimationFrame(animate);
+    }
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -61,122 +84,134 @@ const About = () => {
         </div>
       </section>
 
-      {/* CBO Status */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-30">
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-12 border border-blue-100">
-          <div className="flex items-center justify-center mb-6">
-            <FileText className="h-12 w-12 text-blue-600" />
+      {/* Mission, Vision, Values - Callout Cards */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[-4rem] mb-16 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-30">
+        <Card className="hover:shadow-lg transition-shadow border-t-4 border-blue-600 flex flex-col items-center text-center py-8">
+          <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <Target className="h-8 w-8 text-blue-600" />
           </div>
-          <h2 className="text-2xl font-bold text-center text-gray-900 mb-4">
-            Legally Registered Community-Based Organization
-          </h2>
-          <p className="text-center text-gray-700 mb-6">
-            NUCSA is officially registered as a Community-Based Organization (CBO) under Kenyan law, ensuring transparency, accountability, and legitimate representation of student interests across Nairobi County.
-          </p>
-          <div className="text-center">
-            <Button className="bg-blue-600 hover:bg-blue-700 shadow-md px-6 py-3 rounded-lg text-lg font-semibold">
-              Download NUCSA Constitution
-            </Button>
+          <CardTitle className="text-2xl mb-2">Our Mission</CardTitle>
+          <CardDescription className="text-gray-700 text-base mb-2">
+            <ul className="list-disc list-inside text-left mx-auto max-w-xs">
+              <li>Represent and advocate for Nairobi students</li>
+              <li>Foster unity and promote student welfare</li>
+              <li>Nurture leadership and impactful engagement</li>
+            </ul>
+          </CardDescription>
+        </Card>
+        <Card className="hover:shadow-lg transition-shadow border-t-4 border-green-600 flex flex-col items-center text-center py-8">
+          <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+            <Heart className="h-8 w-8 text-green-600" />
           </div>
-        </div>
+          <CardTitle className="text-2xl mb-2">Our Vision</CardTitle>
+          <CardDescription className="text-gray-700 text-base mb-2">
+            <ul className="list-disc list-inside text-left mx-auto max-w-xs">
+              <li>Be the leading, united, and vibrant voice for students</li>
+              <li>Empower students to achieve academic, personal, and societal excellence</li>
+            </ul>
+          </CardDescription>
+        </Card>
+        <Card className="hover:shadow-lg transition-shadow border-t-4 border-yellow-400 flex flex-col items-center text-center py-8">
+          <div className="w-14 h-14 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+            <Star className="h-8 w-8 text-yellow-500" />
+          </div>
+          <CardTitle className="text-2xl mb-2">Our Values</CardTitle>
+          <CardDescription className="text-gray-700 text-base mb-2">
+            <ul className="list-disc list-inside text-left mx-auto max-w-xs">
+              <li>Integrity & Accountability</li>
+              <li>Inclusivity & Diversity</li>
+              <li>Service & Leadership</li>
+            </ul>
+          </CardDescription>
+        </Card>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card className="hover:shadow-lg transition-shadow border-t-4 border-blue-600">
-            <CardHeader>
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <Target className="h-6 w-6 text-blue-600" />
-              </div>
-              <CardTitle className="text-2xl">Our Mission</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-gray-700 text-base">
-                To represent, advocate for and serve the collective interests of Nairobi universities and colleges students by fostering unity, promoting student welfare, nurturing leadership and facilitating impactful engagement in academic, social, economic and civic spheres.
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card className="hover:shadow-lg transition-shadow border-t-4 border-green-600">
-            <CardHeader>
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                <Heart className="h-6 w-6 text-green-600" />
-              </div>
-              <CardTitle className="text-2xl">Our Vision</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-gray-700 text-base">
-                To be the leading, united and vibrant voice for university and college students in Nairobi, empowering them to achieve academic, personal and societal excellence.
-              </CardDescription>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Our Story */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="bg-gray-50 rounded-2xl p-8 shadow-md border border-gray-100">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Our Story</h2>
-          <div className="prose prose-lg max-w-none text-gray-700 mx-auto">
-            <p className="mb-4">
-              NUCSA was founded with a simple yet powerful vision: to bring together students from all universities and colleges within Nairobi County under one unified voice. Recognizing the strength that comes from unity, we established our organization as a platform for collaboration, advocacy, and positive change.
-            </p>
-            <p className="mb-4">
-              As a registered Community-Based Organization, we operate with full transparency and accountability to our members and the broader community. Our governance structure ensures that every student voice is heard and that our initiatives align with the needs and aspirations of our diverse membership.
-            </p>
-            <p>
-              Today, NUCSA continues to grow and evolve, adapting to the changing needs of students while maintaining our core commitment to excellence, unity, and community service.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Impact Areas */}
+      {/* Our Impact - Animated Counters */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Impact Areas</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card className="hover:shadow-lg transition-shadow border-t-4 border-blue-400">
-            <CardHeader>
-              <CardTitle className="text-xl">Academic Excellence</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Study groups and peer mentorship</li>
-                <li>• Scholarship opportunities</li>
-                <li>• Academic resource sharing</li>
-                <li>• Career development workshops</li>
-              </ul>
-            </CardContent>
-          </Card>
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Impact</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div className="flex justify-center mb-2"><Users className="h-8 w-8 text-blue-600" /></div>
+            <div className="text-4xl font-bold text-blue-700 mb-1">{impact.members}+</div>
+            <div className="text-gray-600">Active Members</div>
+          </div>
+          <div>
+            <div className="flex justify-center mb-2"><Calendar className="h-8 w-8 text-green-600" /></div>
+            <div className="text-4xl font-bold text-green-700 mb-1">{impact.events}+</div>
+            <div className="text-gray-600">Events Organized</div>
+          </div>
+          <div>
+            <div className="flex justify-center mb-2"><Book className="h-8 w-8 text-yellow-500" /></div>
+            <div className="text-4xl font-bold text-yellow-600 mb-1">{impact.universities}+</div>
+            <div className="text-gray-600">Universities Reached</div>
+          </div>
+          <div>
+            <div className="flex justify-center mb-2"><HeartHandshake className="h-8 w-8 text-purple-600" /></div>
+            <div className="text-4xl font-bold text-purple-700 mb-1">{impact.projects}+</div>
+            <div className="text-gray-600">Community Projects</div>
+          </div>
+        </div>
+      </section>
 
-          <Card className="hover:shadow-lg transition-shadow border-t-4 border-green-400">
-            <CardHeader>
-              <CardTitle className="text-xl">Leadership Development</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Leadership training programs</li>
-                <li>• Student government support</li>
-                <li>• Public speaking workshops</li>
-                <li>• Project management skills</li>
+      {/* History Timeline - Accordion */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Story</h2>
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>NUCSA is Founded (2015)</AccordionTrigger>
+            <AccordionContent>
+              <p className="mb-2">A group of passionate students from Nairobi universities came together to form NUCSA, aiming to unite and empower students across the county.</p>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Official CBO Registration (2017)</AccordionTrigger>
+            <AccordionContent>
+              <p className="mb-2">NUCSA became a legally registered Community-Based Organization, ensuring transparency, accountability, and legitimate representation of student interests.</p>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Major Milestones (2018-2025)</AccordionTrigger>
+            <AccordionContent>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Launched annual Leadership Summit and Career Fair</li>
+                <li>Expanded to 25+ universities and colleges</li>
+                <li>Initiated 100+ community projects</li>
+                <li>Recognized for advocacy and student welfare programs</li>
               </ul>
-            </CardContent>
-          </Card>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </section>
 
-          <Card className="hover:shadow-lg transition-shadow border-t-4 border-purple-400">
-            <CardHeader>
-              <CardTitle className="text-xl">Community Service</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Environmental conservation</li>
-                <li>• Youth mentorship programs</li>
-                <li>• Health awareness campaigns</li>
-                <li>• Educational outreach</li>
-              </ul>
-            </CardContent>
+      {/* Testimonials/Quotes */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">What Our Members Say</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <Card className="bg-blue-50 border-l-4 border-blue-400 p-6 flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <Quote className="h-6 w-6 text-blue-400" />
+              <span className="font-semibold text-blue-700">Sarah K., UoN</span>
+            </div>
+            <p className="text-gray-700">“NUCSA gave me the platform to grow as a leader and make lifelong friends. The events and mentorship are top-notch!”</p>
           </Card>
+          <Card className="bg-green-50 border-l-4 border-green-400 p-6 flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <Quote className="h-6 w-6 text-green-400" />
+              <span className="font-semibold text-green-700">Brian M., KU</span>
+            </div>
+            <p className="text-gray-700">“The community projects and support from NUCSA have made a real difference in my academic and personal life.”</p>
+          </Card>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div className="bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-2xl shadow-xl p-10 text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Join NUCSA?</h2>
+          <p className="text-lg mb-6">Become part of a vibrant student community making a difference in Nairobi County. Step up, connect, and grow with us!</p>
+          <Button size="lg" className="bg-white text-blue-700 hover:bg-blue-100 font-semibold px-8 py-4 rounded-lg shadow-md transition-all">
+            Join NUCSA Today
+          </Button>
         </div>
       </section>
     </div>

@@ -125,7 +125,7 @@ const Leadership = () => {
       </section>
 
       {/* Executive Team Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 mb-16 relative z-30">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-16 relative z-30">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Executive Committee</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {executiveTeam.map((leader) => (
@@ -161,7 +161,7 @@ const Leadership = () => {
       {/* Committees Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Committee Structure</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {committees.map((committee, index) => (
             <Card key={index} className="hover:shadow-xl transition-transform duration-300 hover:scale-105 border-t-4 border-green-400 bg-white/90">
               <CardHeader>
@@ -179,17 +179,6 @@ const Leadership = () => {
               </CardContent>
             </Card>
           ))}
-        </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-2xl shadow-xl p-10 text-center">
-          <h2 className="text-3xl font-bold mb-4">Interested in Joining Leadership?</h2>
-          <p className="text-lg mb-6">Become part of a vibrant team making a difference for students across Nairobi County. Step up, lead, and inspire change!</p>
-          <Button size="lg" className="bg-white text-blue-700 hover:bg-blue-100 font-semibold px-8 py-4 rounded-lg shadow-md transition-all">
-            <UserPlus className="h-6 w-6 mr-2" /> Apply for Leadership
-          </Button>
         </div>
       </section>
     </div>

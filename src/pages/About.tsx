@@ -7,26 +7,55 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import { Star as StarIcon } from "lucide-react";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 
-// Use Vite's import.meta.glob to import all jpg images eagerly
-const images = import.meta.glob<string>("@/images/*.jpg", { eager: true, import: 'default' });
-const carouselImages = Object.values(images) as string[];
+// Use Vite's import.meta.glob to import all jpg images dynamically (not eager)
+const imageImports = import.meta.glob<string>("@/images/*.jpg", { import: 'default' });
+const imageKeys = Object.keys(imageImports);
+
+// Helper to dynamically import an image by index
+async function loadImage(index: number) {
+  const key = imageKeys[index % imageKeys.length];
+  // @ts-ignore
+  return await imageImports[key]();
+}
 
 const About = () => {
   // Carousel state
   const [currentImage, setCurrentImage] = useState(0);
   const [prevImage, setPrevImage] = useState(0);
+  const [nextImage, setNextImage] = useState(1);
   const [fade, setFade] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [loadedImages, setLoadedImages] = useState<{ [key: number]: string }>({});
+
+  // Preload current, prev, and next images
+  useEffect(() => {
+    let isMounted = true;
+    const preload = async () => {
+      const indices = [currentImage, prevImage, nextImage];
+      const newLoaded: { [key: number]: string } = {};
+      await Promise.all(indices.map(async (idx) => {
+        if (!(idx in loadedImages)) {
+          newLoaded[idx] = await loadImage(idx);
+        } else {
+          newLoaded[idx] = loadedImages[idx];
+        }
+      }));
+      if (isMounted) setLoadedImages((prev) => ({ ...prev, ...newLoaded }));
+    };
+    preload();
+    return () => { isMounted = false; };
+  }, [currentImage, prevImage, nextImage]);
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       setPrevImage(currentImage);
+      setNextImage((currentImage + 2) % imageKeys.length);
       setFade(true);
       setTimeout(() => {
-        setCurrentImage((prev) => (prev + 1) % carouselImages.length);
+        setCurrentImage((prev) => (prev + 1) % imageKeys.length);
         setFade(false);
-      }, 300); // fade duration
-    }, 1800); // carousel interval
+      }, 300);
+    }, 1800);
     return () => intervalRef.current && clearInterval(intervalRef.current);
   }, [currentImage]);
 
@@ -58,20 +87,29 @@ const About = () => {
       <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white py-24 sm:py-32 lg:py-40 overflow-hidden">
         {/* Carousel Backgrounds for smooth fade */}
         <div className="absolute inset-0 w-full h-full z-0">
-          <img
-            src={carouselImages[prevImage]}
-            alt="carousel-prev"
-            className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${fade ? 'opacity-100' : 'opacity-0'}`}
-            style={{zIndex: 1}}
-            draggable={false}
-          />
-          <img
-            src={carouselImages[currentImage]}
-            alt="carousel-current"
-            className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${fade ? 'opacity-0' : 'opacity-100'}`}
-            style={{zIndex: 2}}
-            draggable={false}
-          />
+          {[prevImage, currentImage, nextImage].map((idx, i) => {
+            if (!(idx in loadedImages)) return null;
+            let loading = "lazy";
+            let fetchPriority = "low";
+            if (idx === 0) fetchPriority = "high";
+            if (idx === currentImage || idx === prevImage || idx === nextImage) loading = "eager";
+            let className = "w-full h-full object-cover absolute inset-0 transition-opacity duration-700";
+            if (idx === prevImage) className += fade ? " opacity-100" : " opacity-0";
+            if (idx === currentImage) className += fade ? " opacity-0" : " opacity-100";
+            if (idx === nextImage) className += " hidden";
+            return (
+              <img
+                key={idx}
+                src={loadedImages[idx]}
+                alt={`carousel-${idx}`}
+                className={className}
+                style={{zIndex: idx === currentImage ? 2 : 1}}
+                draggable={false}
+                loading={loading as any}
+                fetchPriority={fetchPriority as any}
+              />
+            );
+          })}
         </div>
         {/* Overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent z-10" />

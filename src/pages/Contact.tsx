@@ -225,7 +225,7 @@ const Contact = () => {
                   <a href="https://instagram.com/nucsa_official" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                     <Instagram className="h-8 w-8 text-pink-500 hover:text-pink-700 transition" />
                   </a>
-                  <a href="https://linkedin.com/company/nucsa-kenya" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <a href="https://www.linkedin.com/in/nucsa-kenya-708b53358/overlay/about-this-profile/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3B8JDnWD78RFKYpV8i9%2B6xAw%3D%3D" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                     <Linkedin className="h-8 w-8 text-blue-700 hover:text-blue-900 transition" />
                   </a>
                 </div>

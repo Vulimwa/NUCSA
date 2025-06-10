@@ -280,6 +280,27 @@ const About = () => {
           </Button>
         </div>
       </section>
+
+      {/* Constitution Download Section */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-2xl shadow-xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-white">
+          <div className="flex-1 text-center sm:text-left">
+            <h3 className="text-2xl font-bold mb-2">NUCSA Constitution</h3>
+            <p className="text-base mb-4 sm:mb-0">Learn more about our mission, values, and governance. Download the official NUCSA Constitution for full details.</p>
+          </div>
+          <a
+            href="/nucsa-constitution.pdf"
+            download
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-blue-700 font-semibold shadow-lg hover:bg-blue-100 hover:text-blue-900 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+            aria-label="Download NUCSA Constitution PDF"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0l-5.25-5.25M12 19.5l5.25-5.25" />
+            </svg>
+            Download PDF
+          </a>
+        </div>
+      </section>
     </div>
   );
 };

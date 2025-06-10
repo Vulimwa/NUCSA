@@ -250,10 +250,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Meet Our Thematic Champions Section */}
+      {/* Meet Our Thematic Area Champions Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-10">Meet Our Thematic Champions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-10">Meet Our Thematic Area Champions</h2>
           <div className="relative">
             {/* Carousel */}
             <div className="overflow-x-auto whitespace-nowrap scrollbar-hide pb-4">

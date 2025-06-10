@@ -63,7 +63,7 @@ const Leadership = () => {
   const executiveTeam = [
     {
       id: 1,
-      name: "Kelvin Ndara",
+      name: "Kelvin Ndavi",
       position: "Chairperson",
       institution: "Kenyatta University",
       email: "chair@nucsa.org",

@@ -51,7 +51,7 @@ const testimonials = [
   },
   {
     image: 5,
-    name: "Kelvin Ndara",
+    name: "Kelvin Ndavi",
     university: "Kenyatta",
     rating: 4,
     text: "NUCSA is a great place to meet new people and give back to the community."

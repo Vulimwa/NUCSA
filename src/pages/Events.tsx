@@ -3,6 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Users } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 // Use Vite's import.meta.glob to import all jpg images dynamically (not eager)
 const imageImports = import.meta.glob<string>("@/images/*.jpg", { import: 'default' });
@@ -117,6 +120,34 @@ const Events = () => {
       "Sports": "bg-orange-100 text-orange-800"
     };
     return colors[category] || "bg-gray-100 text-gray-800";
+  };
+
+  const [openProposal, setOpenProposal] = useState(false);
+  const [proposal, setProposal] = useState({
+    name: "",
+    email: "",
+    eventTitle: "",
+    eventDate: "",
+    description: ""
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleProposalChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setProposal({ ...proposal, [e.target.name]: e.target.value });
+  };
+  const handleProposalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      setSubmitted(true);
+      setProposal({ name: "", email: "", eventTitle: "", eventDate: "", description: "" });
+      setTimeout(() => {
+        setSubmitted(false);
+        setOpenProposal(false);
+      }, 1800);
+    }, 1200);
   };
 
   return (
@@ -247,11 +278,75 @@ const Events = () => {
           <p className="text-xl mb-6">
             We'd love to hear your suggestions for future events and activities
           </p>
-          <Button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-6 py-3 rounded-lg transition-all">
+          <Button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-6 py-3 rounded-lg transition-all" onClick={() => setOpenProposal(true)}>
             Submit Event Proposal
           </Button>
         </section>
       </div>
+
+      {/* Event Proposal Dialog */}
+      <Dialog open={openProposal} onOpenChange={setOpenProposal}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Submit an Event Proposal</DialogTitle>
+          </DialogHeader>
+          {submitted ? (
+            <div className="text-center py-8">
+              <div className="text-2xl text-green-600 font-bold mb-2">Thank you!</div>
+              <div className="text-gray-700">Your event proposal has been received.</div>
+            </div>
+          ) : (
+            <form className="space-y-4" onSubmit={handleProposalSubmit}>
+              <Input
+                name="name"
+                type="text"
+                placeholder="Your Name"
+                value={proposal.name}
+                onChange={handleProposalChange}
+                required
+              />
+              <Input
+                name="email"
+                type="email"
+                placeholder="Your Email"
+                value={proposal.email}
+                onChange={handleProposalChange}
+                required
+              />
+              <Input
+                name="eventTitle"
+                type="text"
+                placeholder="Event Title"
+                value={proposal.eventTitle}
+                onChange={handleProposalChange}
+                required
+              />
+              <Input
+                name="eventDate"
+                type="date"
+                placeholder="Event Date"
+                value={proposal.eventDate}
+                onChange={handleProposalChange}
+              />
+              <Textarea
+                name="description"
+                placeholder="Describe your event idea..."
+                value={proposal.description}
+                onChange={handleProposalChange}
+                required
+              />
+              <DialogFooter>
+                <Button type="button" variant="outline" onClick={() => setOpenProposal(false)} disabled={submitting}>
+                  Cancel
+                </Button>
+                <Button type="submit" disabled={submitting}>
+                  {submitting ? "Submitting..." : "Submit"}
+                </Button>
+              </DialogFooter>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

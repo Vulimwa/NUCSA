@@ -3,12 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Calendar, Book, Contact } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import com1_4 from '@/images/com 1 (4).jpg';
+import com1_9 from '@/images/com 1 (9).jpg';
+import member2 from '@/images/Member 2.jpg';
+import com1_2 from '@/images/com 1 (2).jpg';
+import img5 from '@/images/5.jpg';
+import com1_6 from '@/images/com 1 (6).jpg';
 
-// Use Vite's import.meta.glob to import all jpg images dynamically (not eager)
 const imageImports = import.meta.glob<string>("@/images/*.jpg", { import: 'default' });
 const imageKeys = Object.keys(imageImports);
 
-// Helper to dynamically import an image by index
 async function loadImage(index: number) {
   const key = imageKeys[index % imageKeys.length];
   // @ts-ignore
@@ -46,7 +50,6 @@ const Index = () => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: string }>({});
 
-  // Preload current, prev, and next images
   useEffect(() => {
     let isMounted = true;
     const preload = async () => {
@@ -77,6 +80,53 @@ const Index = () => {
     }, 1800);
     return () => intervalRef.current && clearInterval(intervalRef.current);
   }, [currentImage]);
+
+  const champions = [
+    {
+      name: "Judy Chepkoech",
+      area: "Sports, Arts, Culture & Entertainment",
+      image: com1_4,
+      message: "I aim to inspire creativity and unity through sports, arts, and culture, making NUCSA a vibrant community for all talents.",
+      wish: "To see every student discover and showcase their unique gifts."
+    },
+    {
+      name: "Rowzil Paultine",
+      area: "Mental Health Awareness",
+      image: com1_9,
+      message: "My mission is to break the stigma around mental health and ensure every student feels supported and heard.",
+      wish: "A campus culture where mental wellness is a priority."
+    },
+    {
+      name: "Caroline Mucomba",
+      area: "Climate Action",
+      image: member2,
+      message: "I am passionate about environmental sustainability and empowering students to take climate action.",
+      wish: "A greener, more sustainable future for all."
+    },
+    {
+      name: "Justice Gift Illa",
+      area: "Youth Leadership",
+      image: com1_2,
+      message: "I believe in nurturing the next generation of leaders through mentorship and opportunity.",
+      wish: "To see youth voices lead positive change."
+    },
+    {
+      name: "Ray Moses Ronnie",
+      area: "Economic Empowerment",
+      image: img5,
+      message: "My goal is to equip students with skills and opportunities for economic independence.",
+      wish: "A future where every student is empowered to succeed."
+    },
+    {
+      name: "Brenda Nyakerario",
+      area: "Economic & Skills Development",
+      image: com1_6,
+      message: "I am dedicated to fostering skills development and economic growth among students.",
+      wish: "To see every student equipped for the modern workforce."
+    }
+  ];
+
+  const [flipped, setFlipped] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen">
@@ -193,6 +243,59 @@ const Index = () => {
                 );
               })}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Meet Our Thematic Champions Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-10">Meet Our Thematic Champions</h2>
+          <div className="relative">
+            {/* Carousel */}
+            <div className="overflow-x-auto whitespace-nowrap scrollbar-hide pb-4">
+              <div className="flex gap-8 animate-champions-scroll" style={{animation: 'champions-scroll 30s linear infinite'}}>
+                {champions.concat(champions).map((champion, idx) => (
+                  <div
+                    key={champion.name + idx}
+                    className="inline-block min-w-[280px] max-w-xs snap-center cursor-pointer group perspective"
+                    tabIndex={0}
+                    aria-label={`Champion: ${champion.name}`}
+                    onClick={() => setFlipped(flipped === idx ? null : idx)}
+                    onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setFlipped(flipped === idx ? null : idx)}
+                  >
+                    <div className={`relative w-full h-80 transition-transform duration-700 transform-style-preserve-3d overflow-hidden ${flipped === idx ? 'rotate-y-180' : ''}`}>
+                      {/* Front */}
+                      <div className="absolute w-full h-full rounded-2xl bg-gradient-to-br from-blue-100 to-green-100 shadow-lg flex flex-col items-center justify-center p-6 backface-hidden" style={{zIndex: 2}}>
+                        <img src={champion.image} alt={champion.name} className="w-24 h-24 rounded-full object-cover border-4 border-blue-300 mb-4 shadow-md" />
+                        <div className="text-lg font-bold text-blue-800 mb-1">{champion.name}</div>
+                        <div className="text-base text-gray-700 font-medium mb-2 text-center">{champion.area}</div>
+                        <span className="inline-block px-3 py-1 bg-blue-200 text-blue-700 rounded-full text-xs font-semibold">Champion</span>
+                      </div>
+                      {/* Back */}
+                      <div className="absolute w-full h-full rounded-2xl bg-gradient-to-br from-green-100 to-blue-100 shadow-lg flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180" style={{zIndex: 3}}>
+                        <div className="w-full h-full flex flex-col justify-center items-center">
+                          <div className="text-base text-gray-800 font-semibold mb-2 text-center break-words whitespace-pre-line">{champion.message}</div>
+                          <div className="text-sm text-blue-700 italic text-center break-words whitespace-pre-line">{champion.wish}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <style>{`
+              @keyframes champions-scroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+              }
+              .animate-champions-scroll { will-change: transform; }
+              .perspective { perspective: 1200px; }
+              .transform-style-preserve-3d { transform-style: preserve-3d; }
+              .rotate-y-180 { transform: rotateY(180deg); }
+              .backface-hidden { backface-visibility: hidden; }
+              .scrollbar-hide::-webkit-scrollbar { display: none; }
+            `}</style>
           </div>
         </div>
       </section>

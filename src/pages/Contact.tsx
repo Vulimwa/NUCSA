@@ -85,12 +85,12 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      details: ["info@nucsa.org"]
+      details: ["nairobistudentsassociation@gmail.com"]
     },
     {
       icon: Phone,
       title: "Phone",
-      details: ["+254 700 000 000"]
+      details: ["+254 112428539"]
     },
     {
       icon: MapPin,

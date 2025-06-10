@@ -61,7 +61,17 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <div className="space-y-2 text-gray-300">
-              <p className="flex items-center gap-2"><Mail className="h-5 w-5 text-blue-400" /> nairobistudentsassociation@gmail.com</p>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=nairobistudentsassociation@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-blue-400 transition-colors"
+                title="Send Email via Gmail"
+              >
+                <Mail className="h-5 w-5 text-blue-400" />
+                <span className="sr-only">Email:</span>
+                nairobistudentsassociation@gmail.com
+              </a>
               <p className="flex items-center gap-2"><Phone className="h-5 w-5 text-green-400" /> +254 112428539</p>
               <p className="flex items-center gap-2"><MapPin className="h-5 w-5 text-yellow-400" /> Nairobi, Kenya</p>
             </div>

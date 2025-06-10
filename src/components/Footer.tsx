@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Calendar, Book, Contact } from "lucide-react";
+import { Mail, Phone, MapPin, Calendar, Book, Contact } from "lucide-react";
 import nucsaLogo from "@/images/nucsa-logo.png";
 
 const Footer = () => {
@@ -61,9 +61,9 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <div className="space-y-2 text-gray-300">
-              <p>info@nucsa.org</p>
-              <p>+254 700 000 000</p>
-              <p>Nairobi, Kenya</p>
+              <p className="flex items-center gap-2"><Mail className="h-5 w-5 text-blue-400" /> nairobistudentsassociation@gmail.com</p>
+              <p className="flex items-center gap-2"><Phone className="h-5 w-5 text-green-400" /> +254 112428539</p>
+              <p className="flex items-center gap-2"><MapPin className="h-5 w-5 text-yellow-400" /> Nairobi, Kenya</p>
             </div>
           </div>
         </div>

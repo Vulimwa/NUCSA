@@ -9,6 +9,7 @@ import member2 from '@/images/Member 2.jpg';
 import com1_2 from '@/images/com 1 (2).jpg';
 import img5 from '@/images/5.jpg';
 import com1_6 from '@/images/com 1 (6).jpg';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 
 const imageImports = import.meta.glob<string>("@/images/*.jpg", { import: 'default' });
 const imageKeys = Object.keys(imageImports);
@@ -126,7 +127,8 @@ const Index = () => {
     }
   ];
 
-  const [flipped, setFlipped] = useState<number | null>(null);
+  // Remove flip state
+  const [openChampion, setOpenChampion] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen">
@@ -156,7 +158,8 @@ const Index = () => {
                 style={{zIndex: idx === currentImage ? 2 : 1}}
                 draggable={false}
                 loading={loading as any}
-                fetchPriority={fetchPriority as any}
+                // @ts-ignore: fetchpriority is a valid HTML attribute but not in React types yet
+                fetchpriority={fetchPriority}
               />
             );
           })}
@@ -257,33 +260,38 @@ const Index = () => {
               <div className="flex gap-8 animate-champions-scroll" style={{animation: 'champions-scroll 30s linear infinite'}}>
                 {champions.concat(champions).map((champion, idx) => (
                   <div
-                    key={champion.name + idx}
-                    className="inline-block min-w-[280px] max-w-xs snap-center cursor-pointer group perspective"
+                    key={`${champion.name}-${idx}`}
+                    className="inline-block min-w-[280px] max-w-xs snap-center group perspective"
                     tabIndex={0}
                     aria-label={`Champion: ${champion.name}`}
-                    onClick={() => setFlipped(flipped === idx ? null : idx)}
-                    onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setFlipped(flipped === idx ? null : idx)}
                   >
-                    <div className={`relative w-full h-80 transition-transform duration-700 transform-style-preserve-3d overflow-hidden ${flipped === idx ? 'rotate-y-180' : ''}`}>
-                      {/* Front */}
-                      <div className="absolute w-full h-full rounded-2xl bg-gradient-to-br from-blue-100 to-green-100 shadow-lg flex flex-col items-center justify-center p-6 backface-hidden" style={{zIndex: 2}}>
-                        <img src={champion.image} alt={champion.name} className="w-24 h-24 rounded-full object-cover border-4 border-blue-300 mb-4 shadow-md" />
-                        <div className="text-lg font-bold text-blue-800 mb-1">{champion.name}</div>
-                        <div className="text-base text-gray-700 font-medium mb-2 text-center">{champion.area}</div>
-                        <span className="inline-block px-3 py-1 bg-blue-200 text-blue-700 rounded-full text-xs font-semibold">Champion</span>
-                      </div>
-                      {/* Back */}
-                      <div className="absolute w-full h-full rounded-2xl bg-gradient-to-br from-green-100 to-blue-100 shadow-lg flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180" style={{zIndex: 3}}>
-                        <div className="w-full h-full flex flex-col justify-center items-center">
-                          <div className="text-base text-gray-800 font-semibold mb-2 text-center break-words whitespace-pre-line">{champion.message}</div>
-                          <div className="text-sm text-blue-700 italic text-center break-words whitespace-pre-line">{champion.wish}</div>
-                        </div>
-                      </div>
+                    <div className="relative w-full h-80 overflow-hidden rounded-2xl bg-gradient-to-br from-blue-100 to-green-100 shadow-lg flex flex-col items-center justify-center p-6">
+                      <img src={champion.image} alt={champion.name} className="w-24 h-24 rounded-full object-cover border-4 border-blue-300 mb-4 shadow-md" />
+                      <div className="text-lg font-bold text-blue-800 mb-1">{champion.name}</div>
+                      <div className="text-base text-gray-700 font-medium mb-2 text-center">{champion.area}</div>
+                      <span className="inline-block px-3 py-1 bg-blue-200 text-blue-700 rounded-full text-xs font-semibold mb-3">Champion</span>
+                      <Button size="sm" className="mt-2 bg-blue-700 hover:bg-blue-800 text-white" onClick={() => setOpenChampion(idx)}>
+                        Read Message
+                      </Button>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
+            {/* Dialog Popup for Champion Message */}
+            {openChampion !== null && (
+              <Dialog open={true} onOpenChange={() => setOpenChampion(null)}>
+                <DialogContent className="max-w-md">
+                  <div className="flex flex-col items-center text-center">
+                    <img src={champions[openChampion % champions.length].image} alt={champions[openChampion % champions.length].name} className="w-24 h-24 rounded-full object-cover border-4 border-blue-300 mb-4 shadow-md" />
+                    <DialogTitle className="text-2xl font-bold mb-2">{champions[openChampion % champions.length].name}</DialogTitle>
+                    <div className="text-base text-gray-700 font-medium mb-2">{champions[openChampion % champions.length].area}</div>
+                    <DialogDescription className="mb-4 text-gray-800">{champions[openChampion % champions.length].message}</DialogDescription>
+                    <div className="text-blue-700 italic text-sm">{champions[openChampion % champions.length].wish}</div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            )}
             <style>{`
               @keyframes champions-scroll {
                 0% { transform: translateX(0); }
@@ -291,9 +299,6 @@ const Index = () => {
               }
               .animate-champions-scroll { will-change: transform; }
               .perspective { perspective: 1200px; }
-              .transform-style-preserve-3d { transform-style: preserve-3d; }
-              .rotate-y-180 { transform: rotateY(180deg); }
-              .backface-hidden { backface-visibility: hidden; }
               .scrollbar-hide::-webkit-scrollbar { display: none; }
             `}</style>
           </div>

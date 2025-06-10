@@ -133,7 +133,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Carousel Background */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         {/* Carousel Backgrounds for smooth fade */}
         <div className="absolute inset-0 w-full h-full z-0">
           {/* Only render prev, current, and next images */}

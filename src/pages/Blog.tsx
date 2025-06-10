@@ -122,7 +122,7 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section with Carousel Background */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white py-24 sm:py-32 lg:py-40 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white py-32 sm:py-44 lg:py-56 overflow-hidden">
         {/* Carousel Backgrounds for smooth fade */}
         <div className="absolute inset-0 w-full h-full z-0">
           {[prevImage, currentImage, nextImage].map((idx, i) => {
